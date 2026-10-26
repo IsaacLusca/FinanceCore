@@ -1,0 +1,66 @@
+@host = http://localhost:5005
+@email = alice@example.com
+@password = SenhaForte123!
+@token = COLE_O_TOKEN_RECEBIDO_NO_LOGIN
+@accountId = COLE_O_ID_DA_CONTA
+@destinationAccountId = COLE_O_ID_DA_CONTA_DESTINO
+
+### Registrar usuario
+POST {{host}}/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Alice",
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+### Login
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+### Criar conta
+POST {{host}}/api/accounts
+Authorization: Bearer {{token}}
+
+### Listar contas
+GET {{host}}/api/accounts
+Authorization: Bearer {{token}}
+
+### Consultar conta
+GET {{host}}/api/accounts/{{accountId}}
+Authorization: Bearer {{token}}
+
+### Consultar historico
+GET {{host}}/api/accounts/{{accountId}}/movements?page=1&pageSize=50
+Authorization: Bearer {{token}}
+
+### Deposito simulado
+POST {{host}}/api/accounts/{{accountId}}/deposits
+Authorization: Bearer {{token}}
+Idempotency-Key: deposito-001
+Content-Type: application/json
+
+{
+  "amount": 100.00
+}
+
+### Transferencia
+POST {{host}}/api/transfers
+Authorization: Bearer {{token}}
+Idempotency-Key: transferencia-001
+Content-Type: application/json
+
+{
+  "sourceAccountId": "{{accountId}}",
+  "destinationAccountId": "{{destinationAccountId}}",
+  "amount": 30.00
+}
+
+### Health check
+GET {{host}}/health
