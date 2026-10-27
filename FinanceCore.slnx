@@ -1,5 +1,9 @@
-﻿<Solution>
+<Solution>
   <Folder Name="/src/">
     <Project Path="src/FinanceCore.Api/FinanceCore.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/FinanceCore.IntegrationTests/FinanceCore.IntegrationTests.csproj" />
+    <Project Path="tests/FinanceCore.UnitTests/FinanceCore.UnitTests.csproj" />
   </Folder>
 </Solution>
